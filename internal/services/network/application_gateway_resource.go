@@ -3890,7 +3890,6 @@ func flattenApplicationGatewaySslCertificates(input *[]network.ApplicationGatewa
 			} else {
 				existingVals = existing.([]interface{})
 			}
-			existingVals = existing.([]interface{})
 			for _, existingVal := range existingVals {
 				existingCerts := existingVal.(map[string]interface{})
 				existingName := existingCerts["name"].(string)

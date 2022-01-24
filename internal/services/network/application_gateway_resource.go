@@ -171,6 +171,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 
 			// Required
 			"backend_address_pool": {
+				//lintignore:S016
 				Type: func() pluginsdk.ValueType {
 					if features.ThreePointOh() {
 						return pluginsdk.TypeSet
@@ -178,6 +179,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 					return pluginsdk.TypeList
 				}(),
 				Required: true,
+				//lintignore:S023
 				Elem: &pluginsdk.Resource{
 					Schema: map[string]*pluginsdk.Schema{
 						"name": {
@@ -228,6 +230,8 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 			},
 
 			"backend_http_settings": {
+				//lintignore:S016
+				//lintignore:S017
 				Type: func() pluginsdk.ValueType {
 					if features.ThreePointOh() {
 						return pluginsdk.TypeSet
@@ -237,6 +241,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 				Required: true,
 				MinItems: 1,
 				Elem: &pluginsdk.Resource{
+					//lintignore:S023
 					Schema: map[string]*pluginsdk.Schema{
 						"name": {
 							Type:     pluginsdk.TypeString,
@@ -476,6 +481,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 			},
 
 			"http_listener": {
+				//lintignore:S016
 				Type: func() pluginsdk.ValueType {
 					if features.ThreePointOh() {
 						return pluginsdk.TypeSet
@@ -484,6 +490,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 				}(),
 				Required: true,
 				Elem: &pluginsdk.Resource{
+					//lintignore:S023
 					Schema: map[string]*pluginsdk.Schema{
 						"name": {
 							Type:     pluginsdk.TypeString,
@@ -972,6 +979,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 			},
 
 			"probe": {
+				//lintignore:S016
 				Type: func() pluginsdk.ValueType {
 					if features.ThreePointOh() {
 						return pluginsdk.TypeSet
@@ -980,6 +988,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 				}(),
 				Optional: true,
 				Elem: &pluginsdk.Resource{
+					//lintignore:S023
 					Schema: map[string]*pluginsdk.Schema{
 						"name": {
 							Type:     pluginsdk.TypeString,
@@ -1201,6 +1210,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 			},
 
 			"ssl_certificate": {
+				//lintignore:S016
 				Type: func() pluginsdk.ValueType {
 					if features.ThreePointOh() {
 						return pluginsdk.TypeSet
@@ -2189,9 +2199,9 @@ func expandApplicationGatewayBackendAddressPools(d *pluginsdk.ResourceData) *[]n
 		if fqdnsConfig, ok := d.GetOk("fqdns"); ok {
 			var fqdns []interface{}
 			if features.ThreePointOh() {
-				vs = fqdnsConfig.(*schema.Set).List()
+				fqdns = fqdnsConfig.(*schema.Set).List()
 			} else {
-				vs = fqdnsConfig.([]interface{})
+				fqdns = fqdnsConfig.([]interface{})
 			}
 			for _, ip := range fqdns {
 				backendAddresses = append(backendAddresses, network.ApplicationGatewayBackendAddress{
@@ -2203,9 +2213,9 @@ func expandApplicationGatewayBackendAddressPools(d *pluginsdk.ResourceData) *[]n
 		if ipAddressesConfig, ok := d.GetOk("ip_addresses"); ok {
 			var ipAddresses []interface{}
 			if features.ThreePointOh() {
-				vs = ipAddressesConfig.(*schema.Set).List()
+				ipAddresses = ipAddressesConfig.(*schema.Set).List()
 			} else {
-				vs = ipAddressesConfig.([]interface{})
+				ipAddresses = ipAddressesConfig.([]interface{})
 			}
 			for _, ip := range ipAddresses {
 				backendAddresses = append(backendAddresses, network.ApplicationGatewayBackendAddress{

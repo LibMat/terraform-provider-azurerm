@@ -178,7 +178,6 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 					return pluginsdk.TypeList
 				}(),
 				Required: true,
-				//lintignore:S023
 				Elem: &pluginsdk.Resource{
 					Schema: map[string]*pluginsdk.Schema{
 						"name": {
@@ -228,9 +227,8 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 				}(),
 			},
 
+			//lintignore:S016,S017,S023
 			"backend_http_settings": {
-				//lintignore:S016
-				//lintignore:S017
 				Type: func() pluginsdk.ValueType {
 					if features.ThreePointOh() {
 						return pluginsdk.TypeSet
@@ -240,7 +238,6 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 				Required: true,
 				MinItems: 1,
 				Elem: &pluginsdk.Resource{
-					//lintignore:S023
 					Schema: map[string]*pluginsdk.Schema{
 						"name": {
 							Type:     pluginsdk.TypeString,
@@ -479,8 +476,8 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 				},
 			},
 
+			//lintignore:S016,S023
 			"http_listener": {
-				//lintignore:S016
 				Type: func() pluginsdk.ValueType {
 					if features.ThreePointOh() {
 						return pluginsdk.TypeSet
@@ -489,7 +486,6 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 				}(),
 				Required: true,
 				Elem: &pluginsdk.Resource{
-					//lintignore:S023
 					Schema: map[string]*pluginsdk.Schema{
 						"name": {
 							Type:     pluginsdk.TypeString,
@@ -977,8 +973,8 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 				Optional: true,
 			},
 
+			//lintignore:S016,S023
 			"probe": {
-				//lintignore:S016
 				Type: func() pluginsdk.ValueType {
 					if features.ThreePointOh() {
 						return pluginsdk.TypeSet
@@ -987,7 +983,6 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 				}(),
 				Optional: true,
 				Elem: &pluginsdk.Resource{
-					//lintignore:S023
 					Schema: map[string]*pluginsdk.Schema{
 						"name": {
 							Type:     pluginsdk.TypeString,
@@ -1208,8 +1203,8 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 				},
 			},
 
+			//lintignore:S016,S023
 			"ssl_certificate": {
-				//lintignore:S016
 				Type: func() pluginsdk.ValueType {
 					if features.ThreePointOh() {
 						return pluginsdk.TypeSet

@@ -3542,6 +3542,7 @@ resource "azurerm_application_gateway" "test" {
     unhealthy_threshold = 8
     match {
       body = ""
+      status_code = ["404-500"]
     }
   }
 

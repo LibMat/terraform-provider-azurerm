@@ -55,5 +55,4 @@ resource "azurerm_sql_failover_group" "example" {
     grace_minutes = 60
   }
 
-  depends_on = [azurerm_mssql_database.secondary]
 }

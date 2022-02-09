@@ -172,7 +172,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 			//lintignore:S016,S023
 			"backend_address_pool": {
 				Type: func() pluginsdk.ValueType {
-					if features.ThreePointOhBetaResources() {
+					if features.ThreePointOhBeta() {
 						return pluginsdk.TypeSet
 					}
 					return pluginsdk.TypeList
@@ -187,7 +187,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 
 						"fqdns": {
 							Type: func() pluginsdk.ValueType {
-								if features.ThreePointOhBetaResources() {
+								if features.ThreePointOhBeta() {
 									return pluginsdk.TypeSet
 								}
 								return pluginsdk.TypeList
@@ -201,7 +201,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 
 						"ip_addresses": {
 							Type: func() pluginsdk.ValueType {
-								if features.ThreePointOhBetaResources() {
+								if features.ThreePointOhBeta() {
 									return pluginsdk.TypeSet
 								}
 								return pluginsdk.TypeList
@@ -220,7 +220,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 					},
 				},
 				Set: func() pluginsdk.SchemaSetFunc {
-					if features.ThreePointOhBetaResources() {
+					if features.ThreePointOhBeta() {
 						return applicationGatewayBackendAddressPool
 					}
 					return nil
@@ -230,7 +230,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 			//lintignore:S016,S017,S023
 			"backend_http_settings": {
 				Type: func() pluginsdk.ValueType {
-					if features.ThreePointOhBetaResources() {
+					if features.ThreePointOhBeta() {
 						return pluginsdk.TypeSet
 					}
 					return pluginsdk.TypeList
@@ -362,7 +362,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 					},
 				},
 				Set: func() pluginsdk.SchemaSetFunc {
-					if features.ThreePointOhBetaResources() {
+					if features.ThreePointOhBeta() {
 						return applicationGatewayBackendSettingsHash
 					}
 					return nil
@@ -479,7 +479,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 			//lintignore:S016,S023
 			"http_listener": {
 				Type: func() pluginsdk.ValueType {
-					if features.ThreePointOhBetaResources() {
+					if features.ThreePointOhBeta() {
 						return pluginsdk.TypeSet
 					}
 					return pluginsdk.TypeList
@@ -600,7 +600,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 					},
 				},
 				Set: func() pluginsdk.SchemaSetFunc {
-					if features.ThreePointOhBetaResources() {
+					if features.ThreePointOhBeta() {
 						return applicationGatewayHttpListnerHash
 					}
 					return nil
@@ -976,7 +976,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 			//lintignore:S016,S023
 			"probe": {
 				Type: func() pluginsdk.ValueType {
-					if features.ThreePointOhBetaResources() {
+					if features.ThreePointOhBeta() {
 						return pluginsdk.TypeSet
 					}
 					return pluginsdk.TypeList
@@ -1044,7 +1044,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 
 						//lintignore:XS003
 						"match": func() *pluginsdk.Schema {
-							if features.ThreePointOhBetaResources() {
+							if features.ThreePointOhBeta() {
 								return &pluginsdk.Schema{
 									Type:     pluginsdk.TypeList,
 									Optional: true,
@@ -1098,7 +1098,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 					},
 				},
 				Set: func() pluginsdk.SchemaSetFunc {
-					if features.ThreePointOhBetaResources() {
+					if features.ThreePointOhBeta() {
 						return applicationGatewayProbeHash
 					}
 					return nil
@@ -1231,7 +1231,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 			//lintignore:S016,S023
 			"ssl_certificate": {
 				Type: func() pluginsdk.ValueType {
-					if features.ThreePointOhBetaResources() {
+					if features.ThreePointOhBeta() {
 						return pluginsdk.TypeSet
 					}
 					return pluginsdk.TypeList
@@ -1275,7 +1275,7 @@ func resourceApplicationGateway() *pluginsdk.Resource {
 					},
 				},
 				Set: func() pluginsdk.SchemaSetFunc {
-					if features.ThreePointOhBetaResources() {
+					if features.ThreePointOhBeta() {
 						return applicationGatewaySSLCertificate
 					}
 					return nil
@@ -2204,7 +2204,7 @@ func flattenApplicationGatewayTrustedRootCertificates(certs *[]network.Applicati
 func expandApplicationGatewayBackendAddressPools(d *pluginsdk.ResourceData) *[]network.ApplicationGatewayBackendAddressPool {
 	var vs []interface{}
 
-	if features.ThreePointOhBetaResources() {
+	if features.ThreePointOhBeta() {
 		vs = d.Get("backend_address_pool").(*schema.Set).List()
 	} else {
 		vs = d.Get("backend_address_pool").([]interface{})
@@ -2217,7 +2217,7 @@ func expandApplicationGatewayBackendAddressPools(d *pluginsdk.ResourceData) *[]n
 
 		if fqdnsConfig, ok := v["fqdns"]; ok {
 			var fqdns []interface{}
-			if features.ThreePointOhBetaResources() {
+			if features.ThreePointOhBeta() {
 				fqdns = fqdnsConfig.(*schema.Set).List()
 			} else {
 				fqdns = fqdnsConfig.([]interface{})
@@ -2231,7 +2231,7 @@ func expandApplicationGatewayBackendAddressPools(d *pluginsdk.ResourceData) *[]n
 
 		if ipAddressesConfig, ok := v["ip_addresses"]; ok {
 			var ipAddresses []interface{}
-			if features.ThreePointOhBetaResources() {
+			if features.ThreePointOhBeta() {
 				ipAddresses = ipAddressesConfig.(*schema.Set).List()
 			} else {
 				ipAddresses = ipAddressesConfig.([]interface{})
@@ -2302,7 +2302,7 @@ func expandApplicationGatewayBackendHTTPSettings(d *pluginsdk.ResourceData, gate
 	results := make([]network.ApplicationGatewayBackendHTTPSettings, 0)
 	var vs []interface{}
 
-	if features.ThreePointOhBetaResources() {
+	if features.ThreePointOhBeta() {
 		vs = d.Get("backend_http_settings").(*schema.Set).List()
 	} else {
 		vs = d.Get("backend_http_settings").([]interface{})
@@ -2604,7 +2604,7 @@ func flattenApplicationGatewaySslPolicy(input *network.ApplicationGatewaySslPoli
 func expandApplicationGatewayHTTPListeners(d *pluginsdk.ResourceData, gatewayID string) (*[]network.ApplicationGatewayHTTPListener, error) {
 	var vs []interface{}
 
-	if features.ThreePointOhBetaResources() {
+	if features.ThreePointOhBeta() {
 		vs = d.Get("http_listener").(*schema.Set).List()
 	} else {
 		vs = d.Get("http_listener").([]interface{})
@@ -3007,7 +3007,7 @@ func flattenApplicationGatewayFrontendIPConfigurations(input *[]network.Applicat
 
 func expandApplicationGatewayProbes(d *pluginsdk.ResourceData) *[]network.ApplicationGatewayProbe {
 	var vs []interface{}
-	if features.ThreePointOhBetaResources() {
+	if features.ThreePointOhBeta() {
 		vs = d.Get("probe").(*schema.Set).List()
 	} else {
 		vs = d.Get("probe").([]interface{})
@@ -3830,7 +3830,7 @@ func flattenApplicationGatewaySku(input *network.ApplicationGatewaySku) []interf
 
 func expandApplicationGatewaySslCertificates(d *pluginsdk.ResourceData) (*[]network.ApplicationGatewaySslCertificate, error) {
 	var vs []interface{}
-	if features.ThreePointOhBetaResources() {
+	if features.ThreePointOhBeta() {
 		vs = d.Get("ssl_certificate").(*schema.Set).List()
 	} else {
 		vs = d.Get("ssl_certificate").([]interface{})
@@ -3910,7 +3910,7 @@ func flattenApplicationGatewaySslCertificates(input *[]network.ApplicationGatewa
 		// since the certificate data isn't returned we have to load it from the same index
 		if existing, ok := d.GetOk("ssl_certificate"); ok && existing != nil {
 			var existingVals []interface{}
-			if features.ThreePointOhBetaResources() {
+			if features.ThreePointOhBeta() {
 				existingVals = existing.(*schema.Set).List()
 			} else {
 				existingVals = existing.([]interface{})
@@ -4726,14 +4726,14 @@ func applicationGatewayBackendAddressPool(v interface{}) int {
 		buf.WriteString(m["name"].(string))
 
 		if fqdns, ok := m["fqdns"]; ok {
-			if features.ThreePointOhBetaResources() {
+			if features.ThreePointOhBeta() {
 				buf.WriteString(fmt.Sprintf("%s", fqdns.(*pluginsdk.Set).List()))
 			} else {
 				buf.WriteString(fmt.Sprintf("%s", fqdns.([]interface{})))
 			}
 		}
 		if ips, ok := m["ip_addresses"]; ok {
-			if features.ThreePointOhBetaResources() {
+			if features.ThreePointOhBeta() {
 				buf.WriteString(fmt.Sprintf("%s", ips.(*pluginsdk.Set).List()))
 			} else {
 				buf.WriteString(fmt.Sprintf("%s", ips.([]interface{})))
@@ -4766,7 +4766,7 @@ func applicationGatewayProbeHash(v interface{}) int {
 		if v, ok := m["minimum_servers"]; ok {
 			buf.WriteString(fmt.Sprintf("%d", v.(int)))
 		}
-		if features.ThreePointOhBetaResources() {
+		if features.ThreePointOhBeta() {
 			if match, ok := m["match"]; ok {
 				if attrs := match.([]interface{}); len(attrs) == 1 {
 					attr := attrs[0].(map[string]interface{})
